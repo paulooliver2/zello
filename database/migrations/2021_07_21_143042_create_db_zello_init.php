@@ -16,20 +16,20 @@ class CreateDbZelloInit extends Migration
         Schema::create('person', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('birthdate_at');
+            $table->date('birthdate');
             $table->string('cpf');
             $table->string('rg');
             $table->integer('profile');
         });
-        Schema::create('app', function (Blueprint $table) {
+        Schema::create('apps', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('bundle_id');
+            $table->string('bundle_id');
         });
-        Schema::create('tb_person_app', function (Blueprint $table) {
+        Schema::create('person_apps', function (Blueprint $table) {
             $table->id();
             $table->foreignId('person_id');
-            $table->foreignId('app_id');
+            $table->foreignId('apps_id');
         });
     }
 
