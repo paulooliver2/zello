@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Person extends Model
 {
 
+    public $timestamps = false;
     /**
      * The table associated with the model.
      *
