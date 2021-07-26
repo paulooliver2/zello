@@ -2,6 +2,13 @@
 
 Manual de instalação do projeto
 
+Requisitos do projeto
+
+> php 7.x ou superior
+> postgres
+> composer
+
+
 ## Instalaçao inicial
 
 ```
