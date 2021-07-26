@@ -16,6 +16,10 @@ git clone https://github.com/paulooliver2/zello
 ```
 
 ```
+cd zello
+```
+
+```
 composer install
 ```
 
@@ -47,6 +51,6 @@ php artisan migrate
 ## Iniciando servidor
 
 ```
-php artisan server
+php artisan serve
 ```
 
