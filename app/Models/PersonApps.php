@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class PersonApps extends Model
 {
 
-     /**
+    public $timestamps = false;
+
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -28,8 +29,8 @@ class PersonApps extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'bundle_id',
+        'person_id',
+        'apps_id',
     ];
 
     /**
@@ -47,6 +48,5 @@ class PersonApps extends Model
     {
         return $this->hasOne(Apps::class);
     }
-
 
 }
