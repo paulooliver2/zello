@@ -82,6 +82,7 @@ class AppController extends Controller
         } catch (\DomainException $e) {
             return response()->json($e->getMessage(), $e->getCode());
         } catch (\Throwable $e) {
+            Log::channel('stderr')->error($e->getMessage());
             Log::channel('stderr')->error($e->getTraceAsString());
             return response()->json("Erro ao recuperar aplicativo", 500);
         }

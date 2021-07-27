@@ -14,26 +14,20 @@
 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Top navbar</a>
+                <a class="navbar-brand" href="#">Zello</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="/">Pessoa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            <a class="nav-link" href="/apps">Apps</a>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+
                 </div>
             </div>
         </nav>
@@ -41,25 +35,35 @@
             <div class="bg-light p-5 rounded">
                 <h1>Cadastro de pessoas </h1>
                 <form id="formPerson">
+                    <input type="hidden"  name="id"  id="person_id">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="name">
+                        <input type="text" class="form-control" id="person_name"
+                               name="name" maxlength="255">
                     </div>
                     <div class="mb-3">
                         <label for="birthdate" class="form-label">Data de nascimento</label>
-                        <input type="text" class="form-control" id="birthdate">
+                        <input type="text" class="form-control" id="person_birthdate"
+                               name="birthdate" maxlength="10"
+                               placeholder="00/00/0000"
+                               >
                     </div>
                     <div class="mb-3">
                         <label for="cpf" class="form-label">Cpf</label>
-                        <input type="text" class="form-control" id="cpf">
+                        <input type="text"
+                               placeholder="000.000.000-00"
+                               maxlength="11" class="form-control" id="person_cpf"
+                               name="cpf">
                     </div>
                     <div class="mb-3">
                         <label for="rg" class="form-label">Rg</label>
-                        <input type="text" class="form-control" id="rg">
+                        <input type="text" class="form-control" id="person_rg"
+                               name="rg" maxlength="20">
                     </div>
                     <div class="mb-3">
                         <label for="profile" class="form-label">Perfil</label>
-                        <select class="form-select" id="profile" aria-label="Default select example">
+                        <select class="form-select" name="profile"
+                                id="person_profile" aria-label="Default select example">
                             <option selected>Selecione o perfil</option>
                             <option value="1">Usuario comun</option>
                             <option value="2">Gestor</option>
@@ -67,37 +71,104 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
                 </form>
-                <p class="lead">This example is a quick exercise to illustrate how the top-aligned navbar works. As you scroll, this navbar remains in its original position and moves with the rest of the page.</p>
-                <a class="btn btn-lg btn-primary" href="../components/navbar/" role="button">View navbar docs »</a>
+                <p class="lead"></p>
+                <table class="table table-bordered">
+                    <thread>
+                        <tr>
+                            <td>Nome</td>
+                            <td>Data nascimento</td>
+                            <td>Cpf</td>
+                            <td>Rg</td>
+                            <td>Perfil</td>
+                            <td>Ação</td>
+                        </tr>
+                    </thread>
+                    <tbody id="tr_person">
+
+                    </tbody>
+                </table>
             </div>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-        <!-- Optional JavaScript; choose one of the two! -->
-
-        <!-- Option 1: Bootstrap Bundle with Popper -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-
-        <!-- Option 2: Separate Popper and Bootstrap JS -->
-        <!--
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-        -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
         <script>
-            (function () {
-                console.log("paulo");
+            $(document).ready(function () {
+                var profiles = {
+                    1: "Usuario comum",
+                    2: "Gestor",
+                    3: "Administrador"
+                };
+                function listPerson() {
+                    $('#tr_person').empty();
+                    $.get('/api/person', function (response) {
+                        $.each(response, function (c, e) {
+                            var tr = '<tr><td>' + e.name + '</td><td>' +
+                                    e.birthdate + '</td><td>' +
+                                    e.cpf + '</td><td>' +
+                                    e.rg + '</td><td>' +
+                                    profiles[e.profile] + '</td>' +
+                                    '<td><a href="javascript:;" class="personEdit" id="personedit_' +
+                                    e.id + '">Editar</a> | ' +
+                                    '<a href="javascript:;" class="personDel" id="persondel_' +
+                                    e.id + '">Excluir<a></td></tr>';
+                            $('#tr_person').append(tr);
+                        });
+
+                    });
+                }
+
+                listPerson();
                 $("#formPerson").submit(function (e) {
                     e.preventDefault();
+                    if (!!$('#person_id').val()) {
+                        $.ajax({
+                            url: '/api/person/' + $('#person_id').val(),
+                            type: 'PUT',
+                            data: $('#formPerson').serialize(),
+                            success: function (response) {
+                                alert('Pessoa alterada com sucesso');
+                                $('#formPerson')[0].reset();
+                                listPerson();
+                            }
+                        });
+                        return;
+                    }
 
-                    console.log($("#name").val());
+                    $.post('/api/person', $("#formPerson").serialize(), function (response) {
+                        $('#formPerson')[0].reset();
+                        alert('Pessoa cadastrada com sucesso');
+                        listPerson();
+                    });
                 });
+
+                $(document).on('click', '.personEdit', function (e) {
+                    $.get('api/person/' + $(e.target).attr('id').split("_")[1], function (response) {
+                        $('#person_id').val(response.id);
+                        $('#person_name').val(response.name);
+                        $('#person_birthdate').val(response.birthdate);
+                        $('#person_cpf').val(response.cpf);
+                        $('#person_rg').val(response.rg);
+                        $('#person_profile').val(response.profile);
+                    });
+                });
+
+                $(document).on('click', '.personDel', function (e) {
+                    $.ajax({
+                        url: '/api/person/' + $(e.target).attr('id').split("_")[1],
+                        type: 'DELETE',
+                        success: function (response) {
+                            alert('Pessoa excluida com sucesso');
+                            listPerson();
+                        }
+                    });
+                })
             });
+
+
         </script>
     </body>
 </html>
