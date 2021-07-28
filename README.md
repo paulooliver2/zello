@@ -38,6 +38,11 @@ DB_USERNAME=seuusuariodebanco
 DB_PASSWORD=suasenhadebanco
 ```
 
+
+```
+php artisan key:generate
+```
+
 ## Migraçao de banco de dados
 
 **note:** crie uma data base com nome db_zello
