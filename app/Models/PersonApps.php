@@ -38,7 +38,7 @@ class PersonApps extends Model
      */
     public function person()
     {
-        return $this->hasOne(Person::class);
+        return $this->hasMany(Person::class, 'id', 'person_id');
     }
 
     /**
@@ -46,7 +46,7 @@ class PersonApps extends Model
      */
     public function apps()
     {
-        return $this->hasOne(Apps::class);
+        return $this->hasMany(Apps::class, 'id', 'apps_id');
     }
 
 }

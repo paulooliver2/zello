@@ -90,6 +90,36 @@
                     </tbody>
                 </table>
             </div>
+            <div class="bg-light p-5 rounded">
+                <h1>Vincular aplicativo</h1>
+                <form id="formPersonApps">
+                    <div class="mb-3">
+                        <label for="person" class="form-label">Pessoa</label>
+                        <select class="form-select" name="person_id"
+                                id="select_person" aria-label="Default select example">
+                        </select>
+                        <label for="apps" class="form-label">Aplicativo</label>
+                        <select class="form-select" name="apps_id"
+                                id="select_apps" aria-label="Default select example">
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Vincular</button>
+                </form>
+                <p class="lead"></p>
+                <table class="table table-bordered">
+                    <thread>
+                        <tr>
+                            <td>Pessoa</td>
+                            <td>Aplicativo</td>
+                            <td>Ação</td>
+                        </tr>
+                    </thread>
+                    <tbody id="tr_person_apps">
+
+                    </tbody>
+                </table>
+            </div>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
@@ -102,6 +132,7 @@
                     2: "Gestor",
                     3: "Administrador"
                 };
+
                 function listPerson() {
                     $('#tr_person').empty();
                     $.get('/api/person', function (response) {
@@ -116,14 +147,17 @@
                                     '<a href="javascript:;" class="personDel" id="persondel_' +
                                     e.id + '">Excluir<a></td></tr>';
                             $('#tr_person').append(tr);
+                            var options = '<option value="' + e.id + '">' + e.name + '</option>';
+                            $('#select_person').append(options);
                         });
-
                     });
                 }
 
                 listPerson();
+
                 $("#formPerson").submit(function (e) {
                     e.preventDefault();
+
                     if (!!$('#person_id').val()) {
                         $.ajax({
                             url: '/api/person/' + $('#person_id').val(),
@@ -165,8 +199,60 @@
                             listPerson();
                         }
                     });
-                })
+                });
+
+                function listApps() {
+                    $('#select_apps').empty();
+                    $.get('/api/apps', function (response) {
+                        $.each(response, function (c, e) {
+                            var options = '<option value="' + e.id + '">' + e.name + '</option>';
+                            $('#select_apps').append(options);
+                        });
+                    });
+                }
+
+                function listPersonApps(personId) {
+                    $('#tr_person_apps').empty();
+                    $.get('/api/person/' + personId + '/apps', function (response) {
+                        $.each(response, function (c, e) {
+                            var tr = '<tr><td>' + e.person_id + '</td><td>' +
+                                    e.apps_id + '</td><td>' +
+                                    '<a href="javascript:;" class="personAppsDel" id="personappsdel_' +
+                                    e.person_id + '_' + e.id + '">Excluir<a></td></tr>';
+                            $('#tr_person_apps').append(tr);
+
+                        });
+                    });
+                }
+
+                listApps();
+
+                $("#formPersonApps").submit(function (e) {
+                    e.preventDefault();
+                    $.post('/api/person/' + $('select[name=person_id] option:selected').val() + '/apps',
+                            $("#formPersonApps").serialize(), function (response) {
+                        alert('Vinculo feito com sucesso');
+                        listPersonApps($('select[name=person_id] option:selected').val());
+                    });
+                });
+
+
+                $(document).on('click', '.personAppsDel', function (e) {
+                    $.ajax({
+                        url: '/api/person/' + $(e.target).attr('id').split("_")[1] + '/apps/' + $(e.target).attr('id').split("_")[2],
+                        type: 'DELETE',
+                        success: function (response) {
+                            alert('Vinculo excluido com sucesso');
+                            listPersonApps($(e.target).attr('id').split("_")[1]);
+                        }
+                    });
+                });
+
+
+
+
             });
+
 
 
         </script>
