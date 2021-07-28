@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Person extends Model
 {
 
+    public $timestamps = false;
+
     /**
      * The table associated with the model.
      *
@@ -33,14 +35,5 @@ class Person extends Model
         'rg',
         'profile',
     ];
-
-    /**
-     * Get the user that owns the person.
-     */
-    public function personApps()
-    {
-        return $this->belongsTo(PersonApps::class);
-    }
-
 
 }

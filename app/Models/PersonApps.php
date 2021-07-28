@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class PersonApps extends Model
 {
 
-     /**
+    public $timestamps = false;
+
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -28,8 +29,8 @@ class PersonApps extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'bundle_id',
+        'person_id',
+        'apps_id',
     ];
 
     /**
@@ -37,7 +38,7 @@ class PersonApps extends Model
      */
     public function person()
     {
-        return $this->hasOne(Person::class);
+        return $this->hasMany(Person::class, 'id', 'person_id');
     }
 
     /**
@@ -45,8 +46,7 @@ class PersonApps extends Model
      */
     public function apps()
     {
-        return $this->hasOne(Apps::class);
+        return $this->hasMany(Apps::class, 'id', 'apps_id');
     }
-
 
 }

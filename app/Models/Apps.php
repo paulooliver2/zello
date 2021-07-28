@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Apps extends Model
 {
 
-     /**
+    public $timestamps = false;
+
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -38,6 +40,5 @@ class Apps extends Model
     {
         return $this->belongsTo(PersonApps::class);
     }
-
 
 }
