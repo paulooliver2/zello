@@ -33,7 +33,12 @@ class PersonAppController extends Controller
 
     public function all($personId)
     {
-        return response()->json(PersonApps::where('person_id', $personId)->get());
+        $result = \DB::select('select pa.*, p.name as person_name, a.name as apps_name 
+        from person_apps as pa
+        inner join person p on p.id = pa.person_id
+        inner join apps as a on a.id = pa.apps_id 
+        where pa.person_id = ?', [$personId]);
+        return response()->json($result);
     }
 
     public function delete($personId, int $id)

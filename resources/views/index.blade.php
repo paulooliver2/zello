@@ -215,8 +215,8 @@
                     $('#tr_person_apps').empty();
                     $.get('/api/person/' + personId + '/apps', function (response) {
                         $.each(response, function (c, e) {
-                            var tr = '<tr><td>' + e.person_id + '</td><td>' +
-                                    e.apps_id + '</td><td>' +
+                            var tr = '<tr><td>' + e.person_name + '</td><td>' +
+                                    e.apps_name + '</td><td>' +
                                     '<a href="javascript:;" class="personAppsDel" id="personappsdel_' +
                                     e.person_id + '_' + e.id + '">Excluir<a></td></tr>';
                             $('#tr_person_apps').append(tr);

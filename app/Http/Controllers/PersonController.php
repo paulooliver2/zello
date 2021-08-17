@@ -14,7 +14,7 @@ class PersonController extends Controller
         try {
             $request->validate([
                 'name' => 'required|max:255',
-                'birthdate' => 'required',
+                'birthdate' => 'required|max:10',
                 'cpf' => 'required',
                 'rg' => 'required',
                 'profile' => 'required',
@@ -32,6 +32,7 @@ class PersonController extends Controller
 
             return response()->json($person->toArray());
         } catch (\Throwable $e) {
+            Log::channel('stderr')->error($e->getMessage());
             Log::channel('stderr')->error($e->getTraceAsString());
             return response()->json("erro ao criar pessoa", 500);
         }
